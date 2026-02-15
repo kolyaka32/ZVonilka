@@ -12,9 +12,7 @@
 
 // Files to setup
 #include "data/languages.hpp"
-#include "game/gameField.hpp"
-#include "game/connectMenu/targetConnect.hpp"
-#include "game/gameMenu/savedFields.hpp"
+#include "menu/connectMenu/targetConnect.hpp"
 
 
 // Data, load from setting file
@@ -48,8 +46,6 @@ void InitFile::loadSettings() {
             TargetConnect::writeBaseIP(getText(currentLine).c_str());
         } else if (parameter == "port") {
             TargetConnect::writeBasePort(getText(currentLine).c_str());
-        } else if (parameter == "save") {
-            SavedFields::addField(getText(currentLine));
         }
     }
     // Closing reading file
@@ -95,10 +91,6 @@ void InitFile::saveSettings() {
     outSettings << "\n# Internet base parameters:\n";
     outSettings << "IP = " << TargetConnect::getBaseIP() << "\n";
     outSettings << "port = " << TargetConnect::getBasePort() << "\n";
-
-    // Saving fields
-    outSettings << "\n# Saves:\n";
-    SavedFields::saveFields(outSettings);
 }
 
 #endif  // (USE_SETTING_FILE)

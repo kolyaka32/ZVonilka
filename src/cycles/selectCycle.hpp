@@ -12,8 +12,6 @@
 class SelectCycle : public BaseCycle {
  private:
     GUI::HighlightedStaticText titleText;
-    GUI::TextButton singleplayerButton;
-    GUI::TextButton twoPlayerButton;
     GUI::TextButton serverButton;
     GUI::TextButton connectButton;
 

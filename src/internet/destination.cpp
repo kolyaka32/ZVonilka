@@ -27,6 +27,22 @@ Destination::Destination(const char* _name, Uint16 _port) {
     address.sin_port = htons(_port);
 }
 
+/*Destination::Destination(const Destination& _address)
+: address(_address.address) {}
+
+Destination& Destination::operator=(const Destination& _address) {
+    address = _address.address;
+    return *this;
+}
+
+Destination::Destination(Destination&& _address) noexcept
+: address(_address.address) {}
+
+Destination& Destination::operator=(Destination&& _address) noexcept {
+    address = _address.address;
+    return *this;
+}*/
+
 bool Destination::operator==(const sockaddr_in* b) const {
     return address.sin_addr.S_un.S_addr == b->sin_addr.S_un.S_addr
         && address.sin_port == b->sin_port;

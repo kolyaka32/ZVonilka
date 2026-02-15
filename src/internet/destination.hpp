@@ -20,6 +20,12 @@ class Destination {
     Destination(const sockaddr_in* address);
     Destination(const sockaddr* address, int size);
     Destination(const char* name, Uint16 port);
+    /*Destination(const Destination& address);
+    Destination& operator=(const Destination& address);
+    Destination(Destination&& address) noexcept;
+    Destination& operator=(Destination&& address) noexcept;*/
+
+    // Getters
     bool operator==(const sockaddr_in* compareAddress) const;
     const char* getName() const;
     Uint16 getPort() const;

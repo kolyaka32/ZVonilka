@@ -5,9 +5,10 @@
 
 #pragma once
 
-#include "internetCycle.hpp"
-#include "../game/connectMenu/serverInfo.hpp"
-#include "../game/connectMenu/targetConnect.hpp"
+#include "baseCycle.hpp"
+#include "../internet/internet.hpp"
+#include "../menu/connectMenu/serverInfo.hpp"
+#include "../menu/connectMenu/targetConnect.hpp"
 
 
 // Game cycle (for single player (special animation))
@@ -17,7 +18,7 @@ class ClientLobbyCycle : public BaseCycle {
     std::vector<ServerData> serverDatas;
     // Socket for broadcast send data (for finding servers)
     Socket broadcastSendSocket;
-    timer startSearchTimer = 0;
+    timer lastSendSearch = 0;
 
     // Input fields
     GUI::ScrollBox<ServerInfo, ServerData> serverScroller;

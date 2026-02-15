@@ -17,7 +17,7 @@ bool BaseCycle::inputMouseDown() {
         return true;
     }
     if (exitButton.in(mouse)) {
-        App::setNextCycle(Cycle::Menu);
+        App::setNextCycle(Cycle::Select);
         return true;
     }
     return false;

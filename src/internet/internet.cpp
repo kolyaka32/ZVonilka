@@ -19,6 +19,18 @@ void Internet::connectTo(const Destination& _dest) {
     logAdditional("Connecting to %s:%u", _dest.getAddress(), _dest.getPort());
 }
 
+void Internet::detachOf(const sockaddr_in* _address) {
+    // Delete connection
+    for (int i=0; i < reciepients.size(); ++i) {
+        if (reciepients[i].isAddress(_address)) {
+            reciepients.erase(reciepients.begin()+i);
+            logAdditional("Deleting connection to %d", i);
+            return;
+        }
+    }
+    logAdditional("Can't delete connection");
+}
+
 Uint16 Internet::getPort() const {
     return socket.getPort();
 }

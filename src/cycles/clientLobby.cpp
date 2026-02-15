@@ -4,7 +4,7 @@
  */
 
 #include "clientLobby.hpp"
-#include "clientGame.hpp"
+#include "../internet/internet.hpp"
 
 
 ClientLobbyCycle::ClientLobbyCycle(Window& _window)
@@ -74,7 +74,7 @@ void ClientLobbyCycle::update() {
             internet.connectTo(Destination{packet->getSourceAddress()});
 
             // Starting game (as client)
-            App::setNextCycle(Cycle::ClientGame);
+            App::setNextCycle(Cycle::ClientMain);
             break;
 
         default:
@@ -89,7 +89,7 @@ void ClientLobbyCycle::update() {
         case ConnectionCode::Server:
             // Get server information
             // Adding to list
-            serverDatas.emplace_back(packet->getSourceAddress(), int(getTime()-startSearchTimer));
+            serverDatas.emplace_back(packet->getSourceAddress(), int(getTime()-lastSendSearch));
             logAdditional("Added server: address: %s:%d, ping: %d",
                 serverDatas[serverDatas.size()-1].getAddress().getName(),
                 serverDatas[serverDatas.size()-1].getAddress().getPort(),
@@ -99,8 +99,13 @@ void ClientLobbyCycle::update() {
             break;
 
         default:
-            return;
+            break;
         }
+    }
+
+    // Checking, if need update list
+    if (getTime() - lastSendSearch > 10000) {
+        updateList();
     }
 }
 
@@ -138,5 +143,5 @@ void ClientLobbyCycle::updateList() {
     Destination dest{"255.255.255.255", BROADCAST_PORT};
     broadcastSendSocket.send(dest, {ConnectionCode::Search, Uint8(1)});
     // Update timer
-    startSearchTimer = getTime();
+    lastSendSearch = getTime();
 }

@@ -3,13 +3,13 @@
  * <nik.kazankov.05@mail.ru>
  */
 
-#include "serverLobby.hpp"
-#include "serverGame.hpp"
+#include "server.hpp"
+#include "../internet/internet.hpp"
 
 
-bool ServerLobbyCycle::showAddress = false;
+bool ServerCycle::showAddress = false;
 
-ServerLobbyCycle::ServerLobbyCycle(Window& _window)
+ServerCycle::ServerCycle(Window& _window)
 : BaseCycle(_window),
 broadcastRecieveSocket(),
 titleText(_window, 0.5, 0.15,
@@ -32,7 +32,7 @@ hideAddressButton(_window, 0.5, 0.5, {"Hide address", "Скрыть адресс
     logAdditional("Start server lobby cycle");
 }
 
-bool ServerLobbyCycle::inputMouseDown() {
+bool ServerCycle::inputMouseDown() {
     if (BaseCycle::inputMouseDown()) {
         return true;
     }
@@ -61,14 +61,15 @@ bool ServerLobbyCycle::inputMouseDown() {
     return false;
 }
 
-void ServerLobbyCycle::update() {
+void ServerCycle::update() {
     BaseCycle::update();
 
     // Update infobox
     copiedInfoBox.update();
 
-    // Getting internet messages (for main connection)
+    // Getting messages
     while (const GetPacket* packet = internet.getNewMessages()) {
+        // Getting internet messages
         switch (ConnectionCode(packet->getData<Uint8>(0))) {
         case ConnectionCode::Init:
             // Connecting to getted address
@@ -78,15 +79,24 @@ void ServerLobbyCycle::update() {
             internet.sendAllConfirmed({ConnectionCode::Init, Uint8(1)});
 
             // Starting game (as server)
-            App::setNextCycle(Cycle::ServerGame);
+            App::setNextCycle(Cycle::Server);
             return;
+
+        case ConnectionCode::Quit:
+            internet.detachOf(packet->getSourceAddress());
+            break;
 
         default:
             return;
         }
     }
+    // Checking applied messages
+    internet.checkResendMessages();
 
-    // Getting internet messges (for broadcast)
+    // Appling status
+    internet.checkNeedApplyConnection();
+
+    // Getting internet messges (from broadcast)
     while (const GetPacket* packet = broadcastRecieveSocket.recieve()) {
         switch (ConnectionCode(packet->getData<Uint8>(0))) {
         case ConnectionCode::Search:
@@ -100,7 +110,7 @@ void ServerLobbyCycle::update() {
     }
 }
 
-void ServerLobbyCycle::draw() const {
+void ServerCycle::draw() const {
     // Bliting background
     window.setDrawColor(BLACK);
     window.clear();

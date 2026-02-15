@@ -3,39 +3,42 @@
  * <nik.kazankov.05@mail.ru>
  */
 
-#include <array>
-#include "internetCycle.hpp"
+#include "clientMain.hpp"
+#include "../internet/internet.hpp"
 
 
-InternetCycle::InternetCycle(Window& _window)
-: GameCycle(_window),
-playersTurnsTexts {
-    {window, 0.5, 0.05, {"Your turn", "Ваш ход", "Sie spielen aus", "Ваш ход"}},
-    {window, 0.5, 0.05, {"Wait", "Ожидайте", "Erwartet", "Чакаць"}},
-},
+ClientMainCycle::ClientMainCycle(Window& _window)
+: BaseCycle(_window),
 disconnectedBox(window, {"Connection lost", "Соединение потярено", "Verbindung verloren", "Злучэнне страчана"},
     {"Reconnect", "Переприсоединится", "Wiederverbinden", "Паўторна падлучыцца"},
     {"Close", "Закрыть", "Schließen", "Зачыніць"}),
 termianatedBox(window, {"Connection terminated", "Соединение разорвано", "Verbindung unterbrochen", "Злучэнне разарвана"},
-    {"Close", "Закрыть", "Schließen", "Зачыніць"}),
-looseText(window, 0.5, 0.05, {"You loose", "Вы проиграли", "Sie haben verloren", "Вы прайгралі"}, 1),
-winText(window, 0.5, 0.05, {"Win", "Победа", "Sieg", "Перамога"}, 1) {
+    {"Close", "Закрыть", "Schließen", "Зачыніць"}) {
     // Resetting flag
     if (!isRestarted()) {
         disconnectedBox.reset();
         termianatedBox.reset();
     }
-    logAdditional("Start internet game cycle");
+    logAdditional("Start client main cycle");
 }
 
-bool InternetCycle::inputMouseDown() {
-    if (GameCycle::inputMouseDown()) {
+ClientMainCycle::~ClientMainCycle() {
+    if (!isRestarted()) {
+        // Sending message of disconect
+        internet.disconnect();
+        // Clear getting socket
+        internet.close();
+    }
+}
+
+bool ClientMainCycle::inputMouseDown() {
+    if (BaseCycle::inputMouseDown()) {
         return true;
     }
     if (int code = termianatedBox.click(mouse)) {
         if (code == 2) {
             // Quiting to menu
-            App::setNextCycle(Cycle::Menu);
+            App::setNextCycle(Cycle::Select);
         }
         // Not allowing to any another actions
         return true;
@@ -46,7 +49,7 @@ bool InternetCycle::inputMouseDown() {
             internet.sendAll({ConnectionCode::ApplyConnection});
         } else if (code == 3) {
             // Going to menu
-            App::setNextCycle(Cycle::Menu);
+            App::setNextCycle(Cycle::Select);
         }
         // Not allowing to any another actions
         return true;
@@ -54,12 +57,20 @@ bool InternetCycle::inputMouseDown() {
     return false;
 }
 
-void InternetCycle::update() {
+void ClientMainCycle::update() {
     // Basic update
-    GameCycle::update();
+    BaseCycle::update();
     // Getting messages
     while (const GetPacket* packet = internet.getNewMessages()) {
-        getInternetPacket(*packet);
+        // Getting internet messages
+        switch (ConnectionCode(packet->getData<Uint8>(0))) {
+        case ConnectionCode::Quit:
+            termianatedBox.activate();
+            break;
+
+        default:
+            return;
+        }
     }
     // Checking applied messages
     internet.checkResendMessages();
@@ -75,13 +86,19 @@ void InternetCycle::update() {
     }
 }
 
-void InternetCycle::getInternetPacket(const GetPacket& packet) {
-    switch (ConnectionCode(packet.getData<Uint8>(0))) {
-    case ConnectionCode::Quit:
-        termianatedBox.activate();
-        break;
+void ClientMainCycle::draw() const {
+    // Bliting background
+    window.setDrawColor(BLACK);
+    window.clear();
 
-    default:
-        break;
-    }
+    // Drawing upper dashboard
+    exitButton.blit();
+    settings.blit();
+
+    // Messages
+    disconnectedBox.blit();
+    termianatedBox.blit();
+
+    // Bliting all to screen
+    window.render();
 }

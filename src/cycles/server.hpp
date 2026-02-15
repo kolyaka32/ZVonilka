@@ -5,11 +5,12 @@
 
 #pragma once
 
-#include "internetCycle.hpp"
+#include "baseCycle.hpp"
+#include "../internet/internet.hpp"
 
 
 // Cycle with waiting for client connect
-class ServerLobbyCycle : public BaseCycle {
+class ServerCycle : public BaseCycle {
  private:
     // Broadcast socket for server list
     Socket broadcastRecieveSocket;
@@ -30,5 +31,5 @@ class ServerLobbyCycle : public BaseCycle {
     void draw() const override;
 
  public:
-    ServerLobbyCycle(Window& window);
+    ServerCycle(Window& window);
 };

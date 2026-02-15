@@ -28,10 +28,13 @@ class Internet {
 
     // Init part
     void connectTo(const Destination& dest);
-    Uint16 getPort() const;
-    const char* getHostName() const;
+    void detachOf(const sockaddr_in* address);
     void close();
     void disconnect();
+    
+    // Getting localhost data
+    Uint16 getPort() const;
+    const char* getHostName() const;
 
     // Sending data to specialised user, without applience
     void sendFirst(const Destination& dest, const Message& message) const;
