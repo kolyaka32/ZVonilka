@@ -27,16 +27,6 @@ enum class Textures : unsigned {
     FlagGER,
     FlagBEL,
 
-    // Main game part
-    // Game figures
-    Cross,
-    Circle,
-    // Empty cell
-    Cell,
-
-    // Additional part
-    Screamer,
-
     // Global counter of all textures
     Count,
 };

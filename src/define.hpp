@@ -22,32 +22,30 @@
 #define PRELOAD_ANIMATIONS   false  // Preload GIF animaions
 #define PRELOAD_FONTS        true   // Preload fonts
 #define PRELOAD_SOUNDS       true   // Preload sounds
-#define PRELOAD_MUSIC        true   // Preload music
+#define PRELOAD_MUSIC        false  // Preload music
 // Use archive for store additional GFX
 #define PRELOAD_DATA PRELOAD_TEXTURES | PRELOAD_FONTS | PRELOAD_ANIMATIONS | PRELOAD_SOUNDS | PRELOAD_MUSIC
 
 
 // System numbers
-#define WINDOW_NAME "Tic-tac-toe on SDL"   // System game name
+#define WINDOW_NAME "ZVonlika"   // System game name
 
 // Base file names
 // File with all GFX
 #if (PRELOAD_DATA)
-#define DATA_FILE "data-tic-tac-toe.dat"
+#define DATA_FILE "data-zvonilka.dat"
 #endif
 
 // File with all saved data (language, settings, volumes...)
 #if USE_SETTING_FILE
-#define SETTING_FILE "settings-tic-tac-toe.ini"
+#define SETTING_FILE "settings-zvonilka.ini"
 #endif
 
 // Number of active connections in internet part
 #if (USE_NET)
-#define MAX_CONNECTIONS 1
+#define MAX_CONNECTIONS 16
 #define BASE_PORT 8000
 // Broadcast mode
 #define USE_BROADCAST true
-#if (USE_BROADCAST)
 #define BROADCAST_PORT 5667
-#endif
 #endif  // (USE_NET)

@@ -24,8 +24,8 @@ class SettingsMenu : GUI::Template {
     // Flags for select language
     const GUI::ImageButton flags[(unsigned)Language::Count];
     // Sliders and it texts
-    GUI::HighlightedStaticText musicText;
-    GUI::Slider musicSlider;
+    //GUI::HighlightedStaticText musicText;
+    //GUI::Slider musicSlider;
     GUI::HighlightedStaticText soundText;
     GUI::Slider soundSlider;
     // Quit button

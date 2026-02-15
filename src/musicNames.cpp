@@ -11,10 +11,6 @@
 const char* musicFilesNames[unsigned(Music::Count)] = {
     // Menu part
     "mus/menu.mp3",
-
-    // Game part
-    "mus/main-calm.mp3",
-    "mus/main-combat.mp3",
 };
 
 #endif  // (PRELOAD_MUSIC)

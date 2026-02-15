@@ -12,17 +12,65 @@
 
 // Names of sound effects
 enum class Sounds : unsigned {
-    // Game part
-    Turn,
-    Reset,
-    Win,
-    Loose,
+    gabrielBehold,
+    gabrielFooleshness,
+    gabrielMonetki,
+    gabrielParry,
+    gabrielDevil,
 
-    // Internet connection part
-    Disconnect,
+    highFleetEnd,
+    highFleetEvacuation,
+    highFleetKill,
+    highFleetMissle,
+    highFleetNewContact,
+    highFleetStop,
 
-    // Screamer
-    Screamer,
+    kikorikiButerbrod,
+    kikorikiMelody,
+    kikorikiFreezer,
+    kikorikiHrap,
+    kikorikiPogonia,
+    kikorikiSkafandr,
+
+    mgrInvisible,
+    mgrNanomachine,
+    mgrRules,
+    mgrBlood,
+
+    mininosDie,
+    mininosJudgement,
+    mininosPrepare,
+    mininosEnd,
+    mininosUseless,
+    mininosWeak,
+
+    otherKolbasenko,
+    otherGoida,
+    otherHello,
+    otherIcq,
+    otherPipe,
+    otherNuclearControl,
+
+    sisiphusGone,
+    sisiphusDestroy,
+    sisiphusHurt,
+    sisiphusIt,
+    sisiphusEscape,
+
+    windows7Insert,
+    windows7Notify,
+    windows7Remove,
+    windows7Shutdown,
+    windows7Startup,
+    windows7Stop,
+
+    windowsXPCriticalStop,
+    windowsXPDing,
+    windowsXPError,
+    windowsXPInsert,
+    windowsXPRemove,
+    windowsXPShutdown,
+    windowsXPStartup,
 
     // Global counter of all loaded sounds
     Count,

@@ -61,7 +61,7 @@ void SoundsData::loadSound(unsigned _index, const char* _name) {
 }
 
 void SoundsData::play(Sounds _index) const {
-    Mix_PlayChannel(int(_index), sounds[unsigned(_index)], 0);
+    Mix_PlayChannel(-1, sounds[unsigned(_index)], 0);
 }
 
 void SoundsData::setVolume(unsigned _volume) {

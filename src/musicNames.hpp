@@ -15,10 +15,6 @@ enum class Music {
     // Menu part
     Menu,
 
-    // Game part
-    MainCalm,
-    MainCombat,
-
     // Global counter of all loaded sounds
     Count,
 };

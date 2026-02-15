@@ -13,7 +13,6 @@ titleText(window, 0.5, 0.15, {"Tic-tac-toe", "Крестики нолики", "T
 serverButton(window, 0.5, 0.7, {"Create server", "Создать сервер", "Server erstellen", "Стварыць сервер"}),
 connectButton(window, 0.5, 0.9, {"Connect", "Присоединиться", "Beitreten", "Далучыцца"}) {
     // Starting menu song (if wasn't started)
-    music.start(Music::Menu);
     logAdditional("Start select cycle");
 }
 
