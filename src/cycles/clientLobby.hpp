@@ -7,8 +7,8 @@
 
 #include "baseCycle.hpp"
 #include "../internet/internet.hpp"
-#include "../menu/connectMenu/serverInfo.hpp"
-#include "../menu/connectMenu/targetConnect.hpp"
+#include "../menu/serverInfo.hpp"
+#include "../menu/targetConnect.hpp"
 
 
 // Game cycle (for single player (special animation))

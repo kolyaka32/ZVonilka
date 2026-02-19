@@ -28,7 +28,8 @@
 
 
 // System numbers
-#define WINDOW_NAME "ZVonlika"   // System game name
+#define WINDOW_NAME "ZVonlika"
+#define LOG_NAME "log.txt"
 
 // Base file names
 // File with all GFX
@@ -45,7 +46,5 @@
 #if (USE_NET)
 #define MAX_CONNECTIONS 16
 #define BASE_PORT 8000
-// Broadcast mode
-#define USE_BROADCAST true
 #define BROADCAST_PORT 5667
 #endif  // (USE_NET)

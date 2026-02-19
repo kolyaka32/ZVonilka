@@ -74,6 +74,9 @@ enum class Sounds : unsigned {
 
     // Global counter of all loaded sounds
     Count,
+
+    // Shortcut for changing slider sound in settings
+    SliderSound = windowsXPCriticalStop,
 };
 
 // File names of the corresponding sounds

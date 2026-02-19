@@ -28,21 +28,17 @@ void Internet::detachOf(const sockaddr_in* _address) {
             return;
         }
     }
-    logAdditional("Can't delete connection");
+    logAdditional("Can't detach connection");
 }
 
 Uint16 Internet::getPort() const {
     return socket.getPort();
 }
 
-const char* Internet::getHostName() const {
-    return getLocalHostName();
-}
-
 void Internet::close() {
-    logAdditional("Close datagramm socket");
     // Closing all reciepients
     reciepients.clear();
+    logAdditional("Close all connections");
 }
 
 void Internet::disconnect() {
@@ -81,7 +77,7 @@ void Internet::sendFirst(const Destination& _dest, const Message& _message) cons
 }
 
 void Internet::sendAll(const Message& _message) {
-    // Sending it to all
+    // Sending it to all recipients
     for (int i=0; i < reciepients.size(); ++i) {
         reciepients[i].sendUnconfirmed(socket, _message);
     }

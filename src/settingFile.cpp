@@ -12,7 +12,7 @@
 
 // Files to setup
 #include "data/languages.hpp"
-#include "menu/connectMenu/targetConnect.hpp"
+#include "menu/targetConnect.hpp"
 
 
 // Data, load from setting file
@@ -39,9 +39,9 @@ void InitFile::loadSettings() {
                 LanguagedText::setLanguage(Language::Bellarusian);
             }
         } else /*if (parameter == "music") {
-            music.setVolume(getValue(currentLine));
+            audio.music.setVolume(getValue(currentLine));
         } else*/ if (parameter == "sounds") {
-            sounds.setVolume(getValue(currentLine));
+            audio.sounds.setVolume(getValue(currentLine));
         } else if (parameter == "IP") {
             TargetConnect::writeBaseIP(getText(currentLine).c_str());
         } else if (parameter == "port") {
@@ -84,8 +84,8 @@ void InitFile::saveSettings() {
     }
 
     // Writing music and sounds volumes
-    //outSettings << "music = " << music.getVolume() << "\n";
-    outSettings << "sounds = " << sounds.getVolume() << "\n";
+    //outSettings << "music = " << audio.music.getVolume() << "\n";
+    outSettings << "sounds = " << audio.sounds.getVolume() << "\n";
 
     // Writing internet connection data
     outSettings << "\n# Internet base parameters:\n";

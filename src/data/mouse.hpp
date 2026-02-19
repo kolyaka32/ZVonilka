@@ -19,7 +19,7 @@ class Mouse {
     Mouse();
     void updatePos();
     bool in(SDL_FRect rect) const;
-    bool around(float x, float y) const;
+    bool near(float x, float y) const;
     float getX() const;
     float getY() const;
     SDL_MouseButtonFlags getState() const;

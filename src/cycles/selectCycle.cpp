@@ -9,7 +9,7 @@
 // Starting basic template with main theme
 SelectCycle::SelectCycle(Window& _window)
 : BaseCycle(_window),
-titleText(window, 0.5, 0.15, {"Tic-tac-toe", "Крестики нолики", "Tic-tac-toe", "Крыжыкі нулікі"}, 3, Height::Title),
+titleText(window, 0.5, 0.15, {"ZVonilka", "ZVонилка", "ZVonilka", "ZVонилка"}, 3, Height::Title),
 serverButton(window, 0.5, 0.7, {"Create server", "Создать сервер", "Server erstellen", "Стварыць сервер"}),
 connectButton(window, 0.5, 0.9, {"Connect", "Присоединиться", "Beitreten", "Далучыцца"}) {
     // Starting menu song (if wasn't started)

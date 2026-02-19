@@ -19,7 +19,7 @@ bool Mouse::in(SDL_FRect _rect) const {
     return SDL_PointInRectFloat(&position, &_rect);
 }
 
-bool Mouse::around(float _x, float _y) const {
+bool Mouse::near(float _x, float _y) const {
     return ((_x-position.x)*(_x-position.x)+(_y-position.y)*(_y-position.y)) < 25;
 }
 
